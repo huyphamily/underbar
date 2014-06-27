@@ -319,6 +319,18 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var memo = {};
+    var slicing = Array.prototype.slice;
+
+    return function() {
+      var args = slicing.call(arguments);
+
+      if(memo.hasOwnProperty(args)) {
+        return memo[args];
+      } else {
+        return (memo[args] = func.apply(this, args));
+      }
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
