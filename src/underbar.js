@@ -8,7 +8,7 @@ var _ = {};
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
   _.identity = function(val) {
-    return val
+    return val;
   };
 
   /**
@@ -180,6 +180,15 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+    if(accumulator === undefined) {
+      var value = collection[0];
+    } else {
+      var value = accumulator;
+    }
+    for (var i = 0; i < collection.length; i++) {
+      value = iterator(value, collection[i]);
+    }
+    return value;
   };
 
   // Determine if the array or object contains a given value (using `===`).
