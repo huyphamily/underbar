@@ -185,8 +185,15 @@ var _ = {};
     } else {
       var value = accumulator;
     }
-    for (var i = 0; i < collection.length; i++) {
-      value = iterator(value, collection[i]);
+
+    if(Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        value = iterator(value, collection[i]);
+      }
+    } else {
+      for (var key in collection) {
+        value = iterator(value, collection[key]);
+      }
     }
     return value;
   };
