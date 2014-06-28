@@ -320,15 +320,13 @@ var _ = {};
   // instead if possible.
   _.memoize = function(func) {
     var memo = {};
-    var slicing = Array.prototype.slice;
 
-    return function() {
-      var args = slicing.call(arguments);
+    return function(n) {
 
-      if(memo.hasOwnProperty(args)) {
-        return memo[args];
+      if(memo.hasOwnProperty(n)) {
+        return memo[n];
       } else {
-        return (memo[args] = func.apply(this, args));
+        return (memo[n] = func.apply(this, arguments));
       }
     }
   };
@@ -340,6 +338,14 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = [];
+    for (var i = 2; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    setTimeout(function() {
+      return func.apply(this, args);
+    }, wait);
   };
 
 
