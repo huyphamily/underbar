@@ -360,7 +360,7 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-    array2 = Array.prototype.slice.call(array);
+    var array2 = Array.prototype.slice.call(array);
     var counter = array2.length;
     var temp;
     var index;
